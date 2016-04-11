@@ -3,7 +3,7 @@ var requireDir = require('require-dir');
 
 requireDir('./gulp/tasks', { resource: true });
 
-gulp.task('watch', ['webpack'], function() {
+gulp.task('watch', ['webpack', 'copy'], function() {
   gulp.watch('./src/js/**/*.js', ['webpack']);
   gulp.watch('./src/js/**/*.css', ['webpack']);
   gulp.watch('./src/*.html', ['copy']);

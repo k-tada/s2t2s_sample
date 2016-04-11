@@ -51,12 +51,12 @@ class WebSpeechAPI extends React.Component {
     return(
       <div styleName="section">
         <div styleName="button-area">
-          <RaisedButton styleName="button" onClick={ this.s2t.bind(this) } label="Speech -> Text" />
-          <RaisedButton styleName="button" onClick={ this.t2s.bind(this) } label="Text -> Speech" primary={true} />
-          <RaisedButton styleName="button" onClick={ this.s2t2s.bind(this) } label="Speech -> Text -> Speech" secondary={true} />
+          <RaisedButton styleName="button" onClick={ ::this.s2t } label="Speech -> Text" />
+          <RaisedButton styleName="button" onClick={ ::this.t2s } label="Text -> Speech" primary={true} />
+          <RaisedButton styleName="button" onClick={ ::this.s2t2s } label="Speech -> Text -> Speech" secondary={true} />
         </div>
         <div styleName="text-area">
-          <textarea styleName="speech-text" value={ this.state.text } onChange={ this.setText.bind(this) }></textarea>
+          <textarea styleName="speech-text" value={ this.state.text } onChange={ ::this.setText }></textarea>
         </div>
       </div>
     );
