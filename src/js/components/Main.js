@@ -1,5 +1,6 @@
 import React from 'react';
 import WebSpeechAPI from './WebSpeechAPI';
+import AITalk from './AITalk';
 import style from './Main.css';
 import CSSModules from 'react-css-modules';
 
@@ -12,6 +13,7 @@ class Main extends React.Component {
     return (
       <div styleName="main">
         <WebSpeechAPI />
+        <AITalk />
       </div>
     );
   }

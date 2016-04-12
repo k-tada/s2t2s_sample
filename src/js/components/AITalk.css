@@ -1,0 +1,23 @@
+.section {
+  margin: 0;
+  background-color: #FFE0FF;
+  text-align: center;
+}
+
+.button-area {
+  margin: 10px 15px;
+}
+
+.button {
+  display: inline-block;
+  margin: 10px 5px;
+}
+
+.text-area {
+  width: 80%;
+  margin: 20px auto 0;
+}
+.speech-text {
+  width: 100%;
+  height: 100px;
+}
