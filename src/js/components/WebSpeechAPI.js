@@ -1,20 +1,24 @@
-import React from 'react';
+import { Component } from 'react';
 import { RaisedButton } from 'material-ui';
 import style from './WebSpeechAPI.css';
 import CSSModules from 'react-css-modules';
 import { EventEmitter } from 'fbemitter';
 
-class WebSpeechAPI extends React.Component {
+@connect(state => ({
+  recognition: state.recognition,
+  synthesis: state.synthesis
+}))
+class WebSpeechAPI extends Component {
   constructor( props ) {
     super( props );
-    window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
-    this.recognition = new webkitSpeechRecognition();
-    this.recognition.lang = 'ja';
-    this.synthesisor = new SpeechSynthesisUtterance();
-    this.synthesisor.lang = 'ja-UP';
-    this.synthesisor.voice = window.speechSynthesis.getVoices()[7];
-    this.emitter = new EventEmitter();
-    this.state = { text: '' };
+    // window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+    // this.recognition = new webkitSpeechRecognition();
+    // this.recognition.lang = 'ja';
+    // this.synthesisor = new SpeechSynthesisUtterance();
+    // this.synthesisor.lang = 'ja-UP';
+    // this.synthesisor.voice = window.speechSynthesis.getVoices()[7];
+    // this.emitter = new EventEmitter();
+    // this.state = { text: '' };
   }
 
   componentDidMount() {
