@@ -1,9 +1,15 @@
-import { combineReduces } from 'redux';
+import { combineReducers } from 'redux';
 import recognition from './recognition';
 import synthesis from './synthesis';
+import text from './text';
+import api from './api';
 
-export default combineReduces({
+const reducers =  combineReducers({
   recognition,
-  synthesis
+  synthesis,
+  text,
+  api
 });
+
+export default reducers;
 

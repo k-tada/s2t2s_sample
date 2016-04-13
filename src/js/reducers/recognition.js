@@ -1,4 +1,8 @@
-import actions from '../actions/recognition';
+import {
+  RECOGNITION_START,
+  RECOGNITION_STOP,
+  RECOGNITION_FINISH,
+} from '../constants';
 
 const initState = () => {
   window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
@@ -6,26 +10,25 @@ const initState = () => {
   recognition.lang = 'ja';
 
   return {
-    recognition: recognition,
+    recognizer: recognition,
     recognising: false,
-    text: ''
   }
 };
 
-export function recognitionReducer ( state = initState(), action ) {
+export default ( state = initState(), action ) => {
   switch( action.type ) {
-    case actions.START:
+    case RECOGNITION_START:
       return Object.assign({}, state, {
         recognising: true
       });
-    case actions.STOP:
+    case RECOGNITION_STOP:
       return Object.assign({}, state, {
         recognising: false
       });
-    case actions.ONRESULT:
+    case RECOGNITION_FINISH:
       return Object.assign({}, state, {
         recognising: false,
-        recognisedText: action.text
       });
+    default: return state;
   }
 };

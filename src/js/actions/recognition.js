@@ -1,47 +1,57 @@
-export const START = 'RECOGNITION.START';
-export const STOP = 'RECOGNITION.STOP';
-export const ONRESULT = 'RECOGNITION.ONRESULT';
-export const APIS = {
-  WEB_SPEECH_API: 'WEB_SPEECH_API'
-};
+import consts from '../constants';
+import { startSynthesis } from '../actions/synthesis';
+// import {
+//   RECOGNITION_START,
+//   RECOGNITION_STOP,
+//   RECOGNITION_FINISH,
+//   TEXT_CHANGE,
+//   APIS
+// } from '../constants';
 
-export function recognitionStart ( api ) {
-  return {
-    type: START,
-    api: api
-  };
-};
-
-export function recognitionStop ( api ) {
-  return {
-    type: STOP,
-    api: api
-  };
-};
-
-export function recognitionOnResult ( text ) {
-  return {
-    type: ONRESULT,
-    text: text
-  };
-};
-
-export function startRecognition ( api ) {
-  return ( dispatch, getState ) => {
-    dispatch( recognitionStart( api ) );
-    var recognition = getState().recognition;
-    recognition.onresult = ( res ) => {
-      dispatch( recognitionOnResult( res.results[0][0].transcript ) );
+function startWebSpeechApi ( dispatch, recognition ) {
+    dispatch({ type: consts.RECOGNITION_START  });
+    const onend = ( e ) => { dispatch({ type: consts.RECOGNITION_STOP }); };
+    recognition.recognizer.onresult = ( res ) => {
+      var txt = res.results[0][0].transcript;
+      dispatch({ type: consts.TEXT_CHANGE, text: txt });
+      dispatch({ type: consts.RECOGNITION_FINISH, text: txt });
+      // setTimeout(() => {
+      //   dispatch(startSynthesis());
+      // }, 500);
+        dispatch(startSynthesis());
+      // startSynthesis();
     };
-    recognition.start();
+    // recognition.recognizer.onend = onend;
+    recognition.recognizer.onerror = onend;
+    recognition.recognizer.start();
+}
+
+export function startRecognition () {
+  return ( dispatch, getState ) => {
+    const { recognition, api } = getState();
+      switch ( api.RECOGNITION ) {
+        case consts.APIS.RECOGNITION.WEB_SPEECH_API:
+          return startWebSpeechApi( dispatch, recognition );
+        default:
+          return;
+      }
   };
 };
+
+function stopWebSpeechApi ( dispatch, recognition ) {
+    recognition.recognizer.stop();
+    dispatch({ type: consts.RECOGNITION_STOP  });
+}
 
 export function stopRecognition ( api ) {
   return ( dispatch, getState ) => {
-    var recognition = getState().recognition;
-    recognition.stop();
-    dispatch( recognitionStop( api ) );
+    const { recognition, api } = getState();
+    switch ( api.RECOGNITION ) {
+      case consts.APIS.RECOGNITION.WEB_SPEECH_API:
+        return stopWebSpeechApi( dispatch, recognition );
+      default:
+        return;
+    }
   };
 };
 

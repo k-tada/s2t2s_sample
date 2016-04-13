@@ -4,7 +4,8 @@ import AITalk from './AITalk';
 import style from './Main.css';
 import CSSModules from 'react-css-modules';
 
-class Main extends React.Component {
+@CSSModules(style)
+export default class Main extends React.Component {
   constructor( props ) {
     super( props );
   }
@@ -13,11 +14,9 @@ class Main extends React.Component {
     return (
       <div styleName="main">
         <WebSpeechAPI />
-        <AITalk />
       </div>
     );
   }
 }
 
-export default CSSModules( Main, style );
 

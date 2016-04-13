@@ -1,27 +1,30 @@
-import actions from '../actions/synthesis';
+import {
+  SYNTHESIS_START,
+  SYNTHESIS_STOP,
+} from '../constants';
 
 const initState = () => {
-  var synthesizer = new SpeechSynthesisUtterance();
-  synthesizer.lang = 'ja-UP';
-  synthesizer.voice = window.speechSynthesis.getVoices()[7];
+  var synthesis = new SpeechSynthesisUtterance();
+  synthesis.lang = 'ja-UP';
+  synthesis.voice = window.speechSynthesis.getVoices()[7];
 
   return {
-    synthesizer: synthesizer,
-    speeching: false,
-    text: ''
+    synthesizer: synthesis,
+    speeching: false
   };
 };
 
-export function synthesisReducer ( state = initState(), action ) {
+export default ( state = initState(), action ) => {
   switch( action.type ) {
-    case synthesis.START:
+    case SYNTHESIS_START:
       return Object.assign({}, state, {
         speeching: true
       });
-    case synthesis.STOP:
+    case SYNTHESIS_STOP:
       return Object.assign({}, state, {
         speeching: false
       });
+    default: return state;
   }
 };
 
