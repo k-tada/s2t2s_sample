@@ -6,7 +6,14 @@ import style from './ButtonArea.css';
 import { STATUSES } from '../constants';
 import { startRecognition, stopRecognition } from '../actions/recognition';
 
-class ButtonArea extends React.Component {
+@connect( state => ({
+  status: state.status
+}), {
+  startRecognition,
+  stopRecognition
+})
+@CSSModules( style )
+export default class ButtonArea extends React.Component {
 
   constructor( props ) {
     super( props );
@@ -29,11 +36,4 @@ class ButtonArea extends React.Component {
     );
   }
 }
-
-export default connect( state => ({
-  status: state.status
-}), {
-  startRecognition,
-  stopRecognition
-})( CSSModules( ButtonArea, style ));
 

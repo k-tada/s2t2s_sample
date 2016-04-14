@@ -4,7 +4,13 @@ import style from './TextArea.css';
 import CSSModules from 'react-css-modules';
 import { changeText } from '../actions/text';
 
-class TextArea extends React.Component {
+@connect( state => ({
+  text: state.text,
+}), {
+  changeText,
+})
+@CSSModules( style )
+export default class TextArea extends React.Component {
 
   constructor( props ) {
     super( props );
@@ -22,10 +28,4 @@ class TextArea extends React.Component {
     );
   }
 }
-
-export default connect( state => ({
-  text: state.text,
-}), {
-  changeText,
-})( CSSModules( TextArea, style ));
 

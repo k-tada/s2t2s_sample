@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import CSSModules from 'react-css-modules';
 import style from './StatusArea.css';
 
-class StatusArea extends React.Component {
+@connect( state => ({
+  status: state.status
+}))
+@CSSModules( style )
+export default class StatusArea extends React.Component {
   constructor( props ) {
     super( props );
   }
@@ -22,8 +26,4 @@ class StatusArea extends React.Component {
     );
   }
 }
-
-export default connect( state => ({
-  status: state.status
-}), {})( CSSModules( StatusArea, style ));
 

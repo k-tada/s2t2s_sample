@@ -6,7 +6,13 @@ import style from './SelectArea.css';
 import { APIS } from '../constants';
 import { setApi } from '../actions/api';
 
-class SelectArea extends React.Component {
+@connect( state => ({
+  api: state.api,
+}), {
+  setApi
+})
+@CSSModules( style )
+export default class SelectArea extends React.Component {
 
   constructor( props ) {
     super( props );
@@ -52,10 +58,4 @@ class SelectArea extends React.Component {
     );
   }
 }
-
-export default connect( state => ({
-  api: state.api,
-}), {
-  setApi
-})( CSSModules( SelectArea, style ));
 
