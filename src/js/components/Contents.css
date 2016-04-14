@@ -1,6 +1,6 @@
 .section {
   margin: 0;
-  background-color: #E0FFFF;
+  /* background-color: #E0FFFF; */
   text-align: center;
 }
 
@@ -25,4 +25,13 @@
 .select-area {
   width: 80%;
   margin: 20px auto 0;
+}
+
+.state-area {
+  width: 80%;
+  margin: 20px auto 0;
+}
+
+.state-area img {
+  width: 400px;
 }

@@ -10,6 +10,7 @@ import { changeText } from '../actions/text';
 import { setApi } from '../actions/api';
 
 class Contents extends React.Component {
+
   constructor( props ) {
     super( props );
   }
@@ -45,6 +46,13 @@ class Contents extends React.Component {
         <MenuItem key={ 'synthesis-menu-item' + i } value={ k } primaryText={ k } />
       );
     });
+
+    var imageFiles = {
+      NORMAL: 'NORMAL.png',
+      LISTENING: 'LISTENING.jpg',
+      SPEAKING: 'SPEAKING.jpg',
+    };
+
     return(
       <div styleName="section">
         <div styleName="select-area">
@@ -70,6 +78,9 @@ class Contents extends React.Component {
         <div styleName="text-area">
           <textarea styleName="speech-text" value={ this.props.text } onChange={ ::this.setText }></textarea>
         </div>
+        <div styleName="state-area">
+          <img src={ './assets/images/' + imageFiles[this.props.status] } />
+        </div>
       </div>
     );
   }
@@ -79,7 +90,8 @@ export default connect( state => ({
   recognition: state.recognition,
   synthesis: state.synthesis,
   text: state.text,
-  api: state.api
+  api: state.api,
+  status: state.status
 }), {
   startRecognition,
   stopRecognition,

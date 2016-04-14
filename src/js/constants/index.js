@@ -10,6 +10,13 @@ export const TEXT_CHANGE= 'TEXT_CHANGE';
 
 export const API_SELECT= 'API_SELECT';
 
+export const STATUS_UPDATE = 'STATUS_UPDATE';
+export const STATUSES = {
+  NORMAL: 'NORMAL',
+  LISTENING: 'LISTENING',
+  SPEAKING: 'SPEAKING'
+};
+
 export const APIS = {
   RECOGNITION: {
     WEB_SPEECH_API: 'WEB_SPEECH_API',

@@ -2,15 +2,22 @@ import axios from 'axios';
 import {
   SYNTHESIS_START,
   SYNTHESIS_STOP,
-  APIS
+  APIS,
+  STATUS_UPDATE,
+  STATUSES
 } from '../constants';
 
 function startWebSpeechApi ( dispatch, synthesis, text ) {
+
   dispatch({ type: SYNTHESIS_START });
+  dispatch({ type: STATUS_UPDATE, status: STATUSES.SPEAKING });
 
   var synthesizer = synthesis.synthesizer[APIS.SYNTHESIS.WEB_SPEECH_API];
 
-  const onend = ( e ) => { dispatch({ type: SYNTHESIS_STOP }); };
+  const onend = ( e ) => {
+    dispatch({ type: SYNTHESIS_STOP });
+    dispatch({ type: STATUS_UPDATE, status: STATUSES.NORMAL });
+  };
   synthesizer.text = text;
   synthesizer.onerror = onend;
   synthesizer.onend = onend;
@@ -18,15 +25,20 @@ function startWebSpeechApi ( dispatch, synthesis, text ) {
 }
 
 function startAIToken( dispatch, synthesis, text ) {
+
   dispatch({ type: SYNTHESIS_START });
+  dispatch({ type: STATUS_UPDATE, status: STATUSES.SPEAKING });
 
   var synthesizer = synthesis.synthesizer[APIS.SYNTHESIS.AI_TALK];
 
-  const onend = ( e ) => { dispatch({ type: SYNTHESIS_STOP }); };
+  const onend = ( e ) => {
+    dispatch({ type: SYNTHESIS_STOP });
+    dispatch({ type: STATUS_UPDATE, status: STATUSES.NORMAL });
+  };
   axios.get('http://webapi.aitalk.jp/webapi/v2/ttsget.php', {
       params: {
-        username: 'nextremer',
-        password: '3mhfrdyQ',
+        username: process.env.AITalk.username,
+        password: process.env.AITalk.password,
         text: text,
         speaker_name: 'yamato_west',
         ext: 'wav'

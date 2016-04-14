@@ -1,6 +1,8 @@
 var dest = './www';
 var src = './src';
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var webpack = require('webpack');
+var fs = require('fs');
 
 module.exports = {
   dest: dest,
@@ -37,7 +39,11 @@ module.exports = {
       ]
     },
     plugins: [
-      new ExtractTextPlugin('../assets/css/style.css', { allChunks: true })
+      new ExtractTextPlugin('../assets/css/style.css', { allChunks: true }),
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(JSON.parse(fs.readFileSync('./gulp/.env.json')).env),
+        'process.env.AITalk': JSON.stringify(JSON.parse(fs.readFileSync('./gulp/.secret.json')))
+      })
     ]
   }
 }
