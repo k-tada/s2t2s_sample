@@ -12,7 +12,5 @@ const logger = store => next => action => {
 export function createRedux() {
   var middlewares = [thunk];
   process.env.NODE_ENV == 'production' || middlewares.push( logger );
-  console.log(middlewares);
-  console.log(...middlewares);
   return applyMiddleware( ...middlewares )( createStore )( reducers );
 }
