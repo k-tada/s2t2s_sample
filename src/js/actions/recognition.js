@@ -1,4 +1,3 @@
-// import consts from '../constants';
 import { startSynthesis } from '../actions/synthesis';
 import {
   RECOGNITION_START,

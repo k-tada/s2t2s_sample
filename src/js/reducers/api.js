@@ -1,16 +1,15 @@
-import consts from '../constants';
-// import { API_SELECT, APIS } from '../constants';
+import { API_SELECT, APIS } from '../constants';
 
 function initState () {
   return {
-    RECOGNITION: consts.APIS.RECOGNITION.WEB_SPEECH_API,
-    SYNTHESIS: consts.APIS.SYNTHESIS.WEB_SPEECH_API
+    RECOGNITION: APIS.RECOGNITION.WEB_SPEECH_API,
+    SYNTHESIS: APIS.SYNTHESIS.WEB_SPEECH_API
   };
 }
 
 export default ( state = initState(), action ) => {
   switch( action.type ) {
-    case consts.API_SELECT:
+    case API_SELECT:
       return Object.assign({}, state, {
         [ action.to ]: action.api
       });

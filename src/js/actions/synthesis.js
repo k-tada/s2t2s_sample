@@ -1,23 +1,28 @@
 import axios from 'axios';
-import consts from '../constants';
-// import {
-//   SYNTHESIS_START,
-//   SYNTHESIS_STOP,
-//   APIS
-// } from '../constants';
+import {
+  SYNTHESIS_START,
+  SYNTHESIS_STOP,
+  APIS
+} from '../constants';
 
 function startWebSpeechApi ( dispatch, synthesis, text ) {
-  dispatch({ type: consts.SYNTHESIS_START });
-  const onend = ( e ) => { dispatch({ type: consts.SYNTHESIS_STOP }); };
-  synthesis.synthesizer.text = text;
-  synthesis.synthesizer.onerror = onend;
-  synthesis.synthesizer.onend = onend;
-  window.speechSynthesis.speak( synthesis.synthesizer );
+  dispatch({ type: SYNTHESIS_START });
+
+  var synthesizer = synthesis.synthesizer[APIS.SYNTHESIS.WEB_SPEECH_API];
+
+  const onend = ( e ) => { dispatch({ type: SYNTHESIS_STOP }); };
+  synthesizer.text = text;
+  synthesizer.onerror = onend;
+  synthesizer.onend = onend;
+  window.speechSynthesis.speak( synthesizer );
 }
 
-function startAIToken( dispatch, text ) {
-  const onend = ( e ) => { dispatch({ type: consts.SYNTHESIS_STOP }); };
-  dispatch({ type: consts.SYNTHESIS_START });
+function startAIToken( dispatch, synthesis, text ) {
+  dispatch({ type: SYNTHESIS_START });
+
+  var synthesizer = synthesis.synthesizer[APIS.SYNTHESIS.AI_TALK];
+
+  const onend = ( e ) => { dispatch({ type: SYNTHESIS_STOP }); };
   axios.get('http://webapi.aitalk.jp/webapi/v2/ttsget.php', {
       params: {
         username: 'nextremer',
@@ -29,14 +34,14 @@ function startAIToken( dispatch, text ) {
       responseType: 'arraybuffer'
       }).then((res) => {
     if( res.status == 200 ) {
-      this.audioContext.decodeAudioData(res.data, (audioBuffer) => {
-        var source = this.audioContext.createBufferSource();
+      synthesizer.audioContext.decodeAudioData(res.data, (audioBuffer) => {
+        var source = synthesizer.audioContext.createBufferSource();
         source.buffer = audioBuffer;
         source.loop = false;
         source.loopStart = 0;
         source.loopEnd = audioBuffer.duration;
         source.playbackRate.value = 1.0;
-        source.connect(this.audioContext.destination);
+        source.connect(synthesizer.audioContext.destination);
         source.start = source.start || source.noteOn;
         source.stop = source.stop || source.noteOff;
         source.onended = (e) => {
@@ -62,10 +67,10 @@ export function startSynthesis () {
   return ( dispatch, getState ) => {
     const { synthesis, text, api } = getState();
     switch ( api.SYNTHESIS ) {
-      case consts.APIS.SYNTHESIS.WEB_SPEECH_API:
+      case APIS.SYNTHESIS.WEB_SPEECH_API:
         return startWebSpeechApi( dispatch, synthesis, text );
-      case consts.APIS.SYNTHESIS.AI_TALK:
-        return startAIToken( dispatch, text );
+      case APIS.SYNTHESIS.AI_TALK:
+        return startAIToken( dispatch, synthesis, text );
       default:
         return;
     }

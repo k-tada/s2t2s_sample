@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { RaisedButton, SelectField, MenuItem } from 'material-ui';
 import style from './Contents.css';
 import CSSModules from 'react-css-modules';
-import consts from '../constants';
-// import { APIS } from '../constants';
+import { APIS } from '../constants';
 import { startRecognition, stopRecognition } from '../actions/recognition';
 import { startSynthesis } from '../actions/synthesis';
 import { changeText } from '../actions/text';
@@ -36,12 +35,12 @@ class Contents extends React.Component {
   }
 
   render() {
-    var recognitionApis = Object.keys( consts.APIS.RECOGNITION ).map(( k, i ) => {
+    var recognitionApis = Object.keys( APIS.RECOGNITION ).map(( k, i ) => {
       return (
         <MenuItem key={ 'recognition-menu-item' + i } value={ k } primaryText={ k } />
       );
     });
-    var synthesisApis = Object.keys( consts.APIS.SYNTHESIS ).map(( k, i ) => {
+    var synthesisApis = Object.keys( APIS.SYNTHESIS ).map(( k, i ) => {
       return (
         <MenuItem key={ 'synthesis-menu-item' + i } value={ k } primaryText={ k } />
       );
