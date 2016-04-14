@@ -1,10 +1,10 @@
 import React from 'react';
-import WebSpeechAPI from './WebSpeechAPI';
-import AITalk from './AITalk';
+import Contents from './Contents';
 import style from './Main.css';
 import CSSModules from 'react-css-modules';
 
-class Main extends React.Component {
+@CSSModules(style)
+export default class Main extends React.Component {
   constructor( props ) {
     super( props );
   }
@@ -12,12 +12,10 @@ class Main extends React.Component {
   render() {
     return (
       <div styleName="main">
-        <WebSpeechAPI />
-        <AITalk />
+        <Contents />
       </div>
     );
   }
 }
 
-export default CSSModules( Main, style );
 

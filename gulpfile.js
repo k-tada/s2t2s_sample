@@ -9,5 +9,6 @@ gulp.task('watch', ['webpack', 'copy'], function() {
   gulp.watch('./src/*.html', ['copy']);
 });
 
-gulp.task('default', ['copy', 'webpack', 'watch']);
+gulp.task('build', ['copy', 'webpack']);
+gulp.task('default', ['build', 'watch']);
 
