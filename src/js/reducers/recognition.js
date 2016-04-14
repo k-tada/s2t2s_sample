@@ -2,17 +2,25 @@ import {
   RECOGNITION_START,
   RECOGNITION_STOP,
   RECOGNITION_FINISH,
+  APIS
 } from '../constants';
 
-const initState = () => {
+const initializeWebSpeechApi = () => {
   window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
   var recognition = new webkitSpeechRecognition();
   recognition.lang = 'ja';
+  return recognition;
+};
+
+const initState = () => {
+  var recognition = {
+    [APIS.RECOGNITION.WEB_SPEECH_API]: initializeWebSpeechApi()
+  };
 
   return {
     recognizer: recognition,
     recognising: false,
-  }
+  };
 };
 
 export default ( state = initState(), action ) => {
