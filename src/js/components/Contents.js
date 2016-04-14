@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { RaisedButton, SelectField, MenuItem } from 'material-ui';
-import style from './WebSpeechAPI.css';
+import style from './Contents.css';
 import CSSModules from 'react-css-modules';
 import consts from '../constants';
 // import { APIS } from '../constants';
@@ -10,21 +10,9 @@ import { startSynthesis } from '../actions/synthesis';
 import { changeText } from '../actions/text';
 import { setApi } from '../actions/api';
 
-class WebSpeechAPI extends React.Component {
+class Contents extends React.Component {
   constructor( props ) {
     super( props );
-  }
-
-  componentWillReceiveProps( next ) {
-    console.log(this.props);
-    console.log(next);
-    if (
-         this.props.recognition.recognising
-      && ! next.recognition.recognising
-      && !! next.text
-    ) {
-      this.props.startSynthesis();
-    }
   }
 
   start() {
@@ -37,7 +25,6 @@ class WebSpeechAPI extends React.Component {
 
   setText( e ) {
     this.props.changeText( e.target.value );
-    // this.setState({ text: e.target.value });
   }
 
   changeRecognitionApi( e, idx, val ) {
@@ -100,5 +87,5 @@ export default connect( state => ({
   startSynthesis,
   changeText,
   setApi
-})( CSSModules( WebSpeechAPI, style ));
+})( CSSModules( Contents, style ));
 
