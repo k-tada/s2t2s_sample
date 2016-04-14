@@ -1,4 +1,4 @@
-import { startSynthesis } from '../actions/synthesis';
+import { sendToHrime } from '../actions/hrime';
 import {
   RECOGNITION_START,
   RECOGNITION_STOP,
@@ -22,7 +22,7 @@ function startWebSpeechApi ( dispatch, recognition ) {
       ended = true;
       dispatch({ type: TEXT_CHANGE, text: txt });
       dispatch({ type: RECOGNITION_FINISH, text: txt });
-      dispatch(startSynthesis());
+      dispatch(sendToHrime());
     };
 
     const onend = ( e ) => {
