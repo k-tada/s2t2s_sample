@@ -1,6 +1,4 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import CSSModules from 'react-css-modules';
 import style from './StatusArea.css';
 
 @connect( state => ({

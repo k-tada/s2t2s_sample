@@ -1,7 +1,5 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import style from './TextArea.css';
-import CSSModules from 'react-css-modules';
 import { changeText } from '../actions/text';
 
 @connect( state => ({

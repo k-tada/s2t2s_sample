@@ -1,7 +1,5 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { SelectField, MenuItem } from 'material-ui';
-import CSSModules from 'react-css-modules';
 import style from './SelectArea.css';
 import { APIS } from '../constants';
 import { setApi } from '../actions/api';

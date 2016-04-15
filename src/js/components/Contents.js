@@ -1,6 +1,4 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import CSSModules from 'react-css-modules';
 import style from './Contents.css';
 import SelectArea from './SelectArea';
 import ButtonArea from './ButtonArea';

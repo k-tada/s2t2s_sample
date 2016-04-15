@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   SYNTHESIS_START,
   SYNTHESIS_STOP,
