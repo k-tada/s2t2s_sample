@@ -1,3 +1,4 @@
+import { startRecognition } from './recognition.js';
 import {
   SYNTHESIS_START,
   SYNTHESIS_STOP,
@@ -16,6 +17,7 @@ function startWebSpeechApi ( dispatch, synthesis, text ) {
   const onend = ( e ) => {
     dispatch({ type: SYNTHESIS_STOP });
     dispatch({ type: STATUS_UPDATE, status: STATUSES.NORMAL });
+    dispatch(startRecognition());
   };
   synthesizer.text = text;
   synthesizer.onerror = onend;
@@ -33,6 +35,7 @@ function startAIToken( dispatch, synthesis, text ) {
   const onend = ( e ) => {
     dispatch({ type: SYNTHESIS_STOP });
     dispatch({ type: STATUS_UPDATE, status: STATUSES.NORMAL });
+    dispatch(startRecognition());
   };
   axios.get('http://webapi.aitalk.jp/webapi/v2/ttsget.php', {
     params: {

@@ -9,27 +9,37 @@ import {
   STATUSES
 } from '../constants';
 
-function startWebSpeechApi ( dispatch, recognition ) {
+function startWebSpeechApi ( dispatch, getState ) {
 
     dispatch({ type: RECOGNITION_START });
     dispatch({ type: STATUS_UPDATE, status: STATUSES.LISTENING });
 
+    var { recognition } = getState();
     var recognizer = recognition.recognizer[APIS.RECOGNITION.WEB_SPEECH_API];
-    var ended = false;
 
     recognizer.onresult = ( res ) => {
+      recognizer.stop();
       var txt = res.results[0][0].transcript;
-      ended = true;
       dispatch({ type: TEXT_CHANGE, text: txt });
       dispatch({ type: RECOGNITION_FINISH, text: txt });
       dispatch(sendToHrime());
     };
 
     const onend = ( e ) => {
-      if ( ! ended) {
-        dispatch({ type: RECOGNITION_STOP });
-        dispatch({ type: STATUS_UPDATE, status: STATUSES.NORMAL });
-      }
+      // onresultが来るまでは基本的にずっとListeningモードにする
+        console.log('recognition restart');
+        recognizer.stop();
+        setTimeout(() => {
+          var { recognition } = getState();
+          if ( recognition.recognising ) {
+            dispatch(startRecognition());
+          }
+        }, 100);
+
+      // if ( ! ended) {
+      //   dispatch({ type: RECOGNITION_STOP });
+      //   dispatch({ type: STATUS_UPDATE, status: STATUSES.NORMAL });
+      // }
     };
     recognizer.onend = onend;
     recognizer.onerror = onend;
@@ -39,10 +49,10 @@ function startWebSpeechApi ( dispatch, recognition ) {
 
 export function startRecognition () {
   return ( dispatch, getState ) => {
-    const { recognition, api } = getState();
+    const { api } = getState();
       switch ( api.RECOGNITION ) {
         case APIS.RECOGNITION.WEB_SPEECH_API:
-          return startWebSpeechApi( dispatch, recognition );
+          return startWebSpeechApi( dispatch, getState );
         default:
           return;
       }
