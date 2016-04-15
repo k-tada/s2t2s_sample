@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   SYNTHESIS_START,
   SYNTHESIS_STOP,
@@ -36,15 +35,15 @@ function startAIToken( dispatch, synthesis, text ) {
     dispatch({ type: STATUS_UPDATE, status: STATUSES.NORMAL });
   };
   axios.get('http://webapi.aitalk.jp/webapi/v2/ttsget.php', {
-      params: {
-        username: process.env.AITalk.username,
-        password: process.env.AITalk.password,
-        text: text,
-        speaker_name: 'yamato_west',
-        ext: 'wav'
-      },
-      responseType: 'arraybuffer'
-      }).then((res) => {
+    params: {
+      username: process.env.AITalk.username,
+      password: process.env.AITalk.password,
+      text: text,
+      speaker_name: 'yamato_west',
+      ext: 'wav'
+    },
+    responseType: 'arraybuffer'
+  }).then((res) => {
     if( res.status == 200 ) {
       synthesizer.audioContext.decodeAudioData(res.data, (audioBuffer) => {
         var source = synthesizer.audioContext.createBufferSource();

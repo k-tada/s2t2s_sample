@@ -14,7 +14,8 @@ export const STATUS_UPDATE = 'STATUS_UPDATE';
 export const STATUSES = {
   NORMAL: 'NORMAL',
   LISTENING: 'LISTENING',
-  SPEAKING: 'SPEAKING'
+  SPEAKING: 'SPEAKING',
+  ANALYZING: 'ANALYZING'
 };
 
 export const APIS = {
@@ -26,4 +27,8 @@ export const APIS = {
     AI_TALK: 'AI_TALK'
   },
 };
+
+export const HRIME_CONNECT = 'HRIME_CONNECT';
+export const HRIME_CONNECTED = 'HRIME_CONNECTED';
+export const HRIME_UTTERANCE = 'HRIME_UTTERANCE';
 

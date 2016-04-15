@@ -1,7 +1,5 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { RaisedButton } from 'material-ui';
-import CSSModules from 'react-css-modules';
 import style from './ButtonArea.css';
 import { STATUSES } from '../constants';
 import { startRecognition, stopRecognition } from '../actions/recognition';

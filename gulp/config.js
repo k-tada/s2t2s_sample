@@ -43,7 +43,13 @@ module.exports = {
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(JSON.parse(fs.readFileSync('./gulp/.env.json')).env),
         'process.env.AITalk': JSON.stringify(JSON.parse(fs.readFileSync('./gulp/.secret.json')))
-      })
+      }),
+      new webpack.ProvidePlugin({
+        'React': 'react',
+        'ReactDOM': 'react-dom',
+        'CSSModules': 'react-css-modules',
+        'axios': 'axios',
+      }),
     ]
   }
 }
