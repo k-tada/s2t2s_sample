@@ -35,12 +35,8 @@ function startWebSpeechApi ( dispatch, getState ) {
             dispatch(startRecognition());
           }
         }, 100);
-
-      // if ( ! ended) {
-      //   dispatch({ type: RECOGNITION_STOP });
-      //   dispatch({ type: STATUS_UPDATE, status: STATUSES.NORMAL });
-      // }
     };
+
     recognizer.onend = onend;
     recognizer.onerror = onend;
 

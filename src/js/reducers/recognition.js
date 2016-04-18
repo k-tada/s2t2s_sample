@@ -20,6 +20,7 @@ const initState = () => {
   return {
     recognizer: recognition,
     recognising: false,
+    text: ''
   };
 };
 
@@ -36,6 +37,7 @@ export default ( state = initState(), action ) => {
     case RECOGNITION_FINISH:
       return Object.assign({}, state, {
         recognising: false,
+        text: action.text
       });
     default: return state;
   }

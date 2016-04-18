@@ -25,7 +25,8 @@ const initState = () => {
 
   return {
     synthesizer: synthesis,
-    speeching: false
+    speeching: false,
+    text: ''
   };
 };
 
@@ -33,7 +34,8 @@ export default ( state = initState(), action ) => {
   switch( action.type ) {
     case SYNTHESIS_START:
       return Object.assign({}, state, {
-        speeching: true
+        speeching: true,
+        text: action.text
       });
     case SYNTHESIS_STOP:
       return Object.assign({}, state, {

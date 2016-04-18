@@ -35,8 +35,6 @@ export default class Contents extends React.Component {
     return(
       <div styleName="section">
         <SelectArea />
-        <ButtonArea />
-        <TextArea />
         <StatusArea />
       </div>
     );

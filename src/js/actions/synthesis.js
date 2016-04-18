@@ -9,9 +9,6 @@ import {
 
 function startWebSpeechApi ( dispatch, synthesis, text ) {
 
-  dispatch({ type: SYNTHESIS_START });
-  dispatch({ type: STATUS_UPDATE, status: STATUSES.SPEAKING });
-
   var synthesizer = synthesis.synthesizer[APIS.SYNTHESIS.WEB_SPEECH_API];
 
   const onend = ( e ) => {
@@ -26,9 +23,6 @@ function startWebSpeechApi ( dispatch, synthesis, text ) {
 }
 
 function startAIToken( dispatch, synthesis, text ) {
-
-  dispatch({ type: SYNTHESIS_START });
-  dispatch({ type: STATUS_UPDATE, status: STATUSES.SPEAKING });
 
   var synthesizer = synthesis.synthesizer[APIS.SYNTHESIS.AI_TALK];
 
@@ -80,6 +74,8 @@ function startAIToken( dispatch, synthesis, text ) {
 export function startSynthesis () {
   return ( dispatch, getState ) => {
     const { synthesis, text, api } = getState();
+    dispatch({ type: SYNTHESIS_START, text: text });
+    dispatch({ type: STATUS_UPDATE, status: STATUSES.SPEAKING });
     switch ( api.SYNTHESIS ) {
       case APIS.SYNTHESIS.WEB_SPEECH_API:
         return startWebSpeechApi( dispatch, synthesis, text );
