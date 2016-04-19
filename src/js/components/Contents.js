@@ -1,8 +1,5 @@
 import { connect } from 'react-redux';
 import style from './Contents.css';
-import SelectArea from './SelectArea';
-import ButtonArea from './ButtonArea';
-import TextArea from './TextArea';
 import StatusArea from './StatusArea';
 import { startSynthesis } from '../actions/synthesis';
 import {
@@ -34,7 +31,6 @@ export default class Contents extends React.Component {
   render() {
     return(
       <div styleName="section">
-        <SelectArea />
         <StatusArea />
       </div>
     );
