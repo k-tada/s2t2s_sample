@@ -46,8 +46,7 @@ function startWebSpeechApi ( dispatch, getState ) {
 
 export function startRecognition () {
   return ( dispatch, getState ) => {
-    const { api } = getState();
-      switch ( api.RECOGNITION ) {
+      switch ( Config.recognition.api ) {
         case APIS.RECOGNITION.WEB_SPEECH_API:
           return startWebSpeechApi( dispatch, getState );
         default:
