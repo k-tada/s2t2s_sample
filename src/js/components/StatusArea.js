@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import style from './StatusArea.css';
+import Balloon from './Balloon';
 import Logs from './Logs';
 
 @connect( state => ({
@@ -21,9 +22,7 @@ export default class StatusArea extends React.Component {
 
     return(
       <div styleName="state-area">
-        <div styleName="balloon">
-        { "予約：あり\nお名前：あああ" }
-        </div>
+        <Balloon />
         <img src={ './assets/images/' + imageFiles[this.props.status] } />
         <Logs />
       </div>

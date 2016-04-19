@@ -4,13 +4,15 @@ import synthesis from './synthesis';
 import text from './text';
 import status from './status';
 import hrime from './hrime';
+import reservation from './reservation';
 
 const reducers =  combineReducers({
   recognition,
   synthesis,
   text,
   status,
-  hrime
+  hrime,
+  reservation
 });
 
 export default reducers;

@@ -49,6 +49,7 @@ module.exports = {
         'ReactDOM': 'react-dom',
         'CSSModules': 'react-css-modules',
         'axios': 'axios',
+        'moment': 'moment',
       }),
     ],
     externals: {
