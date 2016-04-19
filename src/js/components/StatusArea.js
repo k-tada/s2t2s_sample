@@ -1,21 +1,14 @@
 import { connect } from 'react-redux';
-import { startRecognition } from '../actions/recognition';
 import style from './StatusArea.css';
 import Logs from './Logs';
 
 @connect( state => ({
   status: state.status
-}), {
-  startRecognition
-})
+}))
 @CSSModules( style )
 export default class StatusArea extends React.Component {
   constructor( props ) {
     super( props );
-  }
-
-  componentDidMount() {
-    this.props.startRecognition();
   }
 
   render() {

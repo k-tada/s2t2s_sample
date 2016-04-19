@@ -1,11 +1,8 @@
 import { connect } from 'react-redux';
 import style from './Contents.css';
 import StatusArea from './StatusArea';
-import { startSynthesis } from '../actions/synthesis';
-import {
-  TEXT_CHANGE,
-  HRIME_UTTERANCE
-} from '../constants';
+import { startRecognition } from '../actions/recognition';
+import { getEvents } from '../utils/hrime';
 
 @connect( state => ({
   hrime: state.hrime
@@ -18,14 +15,11 @@ export default class Contents extends React.Component {
   }
 
   componentDidMount() {
-    this.props.hrime.socket.on('utterance', ( data ) => {
-      var text = data.scripts.filter( (s) => {
-        return s.actor == 'bot';
-      })[0].payload.response.value;
-      this.props.dispatch({ type: HRIME_UTTERANCE });
-      this.props.dispatch({ type: TEXT_CHANGE, text: text });
-      this.props.dispatch(startSynthesis());
+    var events = getEvents( this.props.dispatch );
+    Object.keys( events ).forEach(( key ) => {
+      this.props.hrime.socket.socket.on( key, events[key] );
     });
+    this.props.dispatch(startRecognition());
   }
 
   render() {

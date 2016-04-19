@@ -53,6 +53,13 @@ module.exports = {
     ],
     externals: {
       'Config': JSON.stringify({
+        hrime: {
+          url: 'http://localhost:3000',
+          basic: {
+            user: '',
+            pass: ''
+          }
+        },
         recognition: {
           api: 'WEB_SPEECH_API',
           lang: 'en-US',
