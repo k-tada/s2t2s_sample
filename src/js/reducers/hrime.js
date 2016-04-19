@@ -21,13 +21,7 @@ function _initState () {
     };
   }
 
-  var socket = new HrimeSocket(
-    config.url,
-    user,
-    pass,
-    io,
-    opts
-  );
+  var socket = new HrimeSocket( config.url, user, pass, io, opts );
 
   socket.init();
   return () => {

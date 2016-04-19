@@ -10,6 +10,7 @@ const initializeWebSpeechApi = () => {
   window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
   var recognition = new webkitSpeechRecognition();
   recognition.lang = Config.recognition.lang;
+  recognition.continuous = true;
   return recognition;
 };
 

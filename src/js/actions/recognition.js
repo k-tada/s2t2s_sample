@@ -28,14 +28,14 @@ function startWebSpeechApi ( dispatch, getState ) {
 
     const onend = ( e ) => {
       // onresultが来るまでは基本的にずっとListeningモードにする
-        console.log('recognition restart');
-        recognizer.stop();
-        setTimeout(() => {
-          var { recognition } = getState();
-          if ( recognition.recognising ) {
-            dispatch(startRecognition());
-          }
-        }, 100);
+        // console.log('recognition restart');
+        // recognizer.stop();
+        // setTimeout(() => {
+        //   var { recognition } = getState();
+        //   if ( recognition.recognising ) {
+        //     dispatch(startRecognition());
+        //   }
+        // }, 100);
     };
 
     recognizer.onend = onend;
