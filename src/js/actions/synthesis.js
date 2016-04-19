@@ -1,3 +1,4 @@
+import Config from 'Config';
 import { startRecognition } from './recognition.js';
 import {
   SYNTHESIS_START,
@@ -73,10 +74,10 @@ function startAIToken( dispatch, synthesis, text ) {
 
 export function startSynthesis () {
   return ( dispatch, getState ) => {
-    const { synthesis, text, api } = getState();
+    const { synthesis, text } = getState();
     dispatch({ type: SYNTHESIS_START, text: text });
     dispatch({ type: STATUS_UPDATE, status: STATUSES.SPEAKING });
-    switch ( api.SYNTHESIS ) {
+    switch ( Config.synthesis.api ) {
       case APIS.SYNTHESIS.WEB_SPEECH_API:
         return startWebSpeechApi( dispatch, synthesis, text );
       case APIS.SYNTHESIS.AI_TALK:

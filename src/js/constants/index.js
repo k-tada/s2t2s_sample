@@ -8,8 +8,6 @@ export const SYNTHESIS_STOP= 'SYNTHESIS_STOP';
 
 export const TEXT_CHANGE= 'TEXT_CHANGE';
 
-export const API_SELECT= 'API_SELECT';
-
 export const STATUS_UPDATE = 'STATUS_UPDATE';
 export const STATUSES = {
   NORMAL: 'NORMAL',

@@ -1,3 +1,4 @@
+import Config from 'Config';
 import {
   RECOGNITION_START,
   RECOGNITION_STOP,
@@ -8,7 +9,7 @@ import {
 const initializeWebSpeechApi = () => {
   window.SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
   var recognition = new webkitSpeechRecognition();
-  recognition.lang = 'ja';
+  recognition.lang = Config.recognition.lang;
   return recognition;
 };
 

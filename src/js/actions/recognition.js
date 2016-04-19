@@ -1,3 +1,4 @@
+import Config from 'Config';
 import { sendToHrime } from '../actions/hrime';
 import {
   RECOGNITION_START,
@@ -63,8 +64,8 @@ function stopWebSpeechApi ( dispatch, recognition ) {
 
 export function stopRecognition ( api ) {
   return ( dispatch, getState ) => {
-    const { recognition, api } = getState();
-    switch ( api.RECOGNITION ) {
+    const { recognition } = getState();
+    switch ( Config.recognition.api ) {
       case APIS.RECOGNITION.WEB_SPEECH_API:
         return stopWebSpeechApi( dispatch, recognition );
       default:

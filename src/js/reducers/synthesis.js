@@ -1,3 +1,4 @@
+import Config from 'Config';
 import {
   SYNTHESIS_START,
   SYNTHESIS_STOP,
@@ -6,7 +7,7 @@ import {
 
 const initializeWebSpeechApi = () => {
   var synthesis = new SpeechSynthesisUtterance();
-  synthesis.lang = 'ja-UP';
+  synthesis.lang = Config.synthesis.lang;
   synthesis.voice = window.speechSynthesis.getVoices()[7];
   return synthesis;
 };

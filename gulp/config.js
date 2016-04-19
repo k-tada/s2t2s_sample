@@ -50,6 +50,18 @@ module.exports = {
         'CSSModules': 'react-css-modules',
         'axios': 'axios',
       }),
-    ]
+    ],
+    externals: {
+      'Config': JSON.stringify({
+        recognition: {
+          api: 'WEB_SPEECH_API',
+          lang: 'en-US',
+        },
+        synthesis: {
+          api: 'WEB_SPEECH_API',
+          lang: 'en-US',
+        },
+      })
+    }
   }
 }
